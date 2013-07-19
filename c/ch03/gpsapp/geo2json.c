@@ -5,6 +5,7 @@ int main()
 	float latitude;
 	float longitude;
 	char info[80];
+	int error = 0;
 	int started = 0;
 	
 	puts("data=[");
@@ -13,8 +14,21 @@ int main()
 			printf(",\n");
 		else
 			started = 1;
+		
+		if ((latitude < -90.0) || (latitude > 90.0)) {
+			fprintf(stderr, "Invalid latitude: %f\n", latitude);
+			error = 2;
+		}
+		if ((longitude < -180.0) || (longitude > 180.0)) {
+			fprintf(stderr, "Invalid longitude: %f\n", longitude);
+			error = 2;
+		}
+					
 		printf("{latitude: %f, longitude: %f, info: '%s'}", latitude, longitude, info);
 	}
 	puts("\n]");
-	return 0;
+	if (error == 2)
+		return 2;
+	else
+		return 0;
 }
