@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "totaller.h"
 
 float total = 0.0;
 short count = 0;
