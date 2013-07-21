@@ -50,11 +50,20 @@ void loop() {
     // store the sensor value for later comparison
     lastValue = sensorValue;
   }
+  // if the value is close to low, flash the LED
+  else if (sensorValue < 850) {
+    // flash the LED
+    digitalWrite(led, HIGH);
+    delay(1000);
+    digitalWrite(led, LOW);
+    delay(1000);
+    lastValue = sensorValue;
+  }
   // otherwise,
   else {
     // if this is the first time that the sensor has read
     // a normal reading, write a message
-    if (lastValue < 800) {
+    if (lastValue < 850) {
       Serial.println("Thank you, Seymour!");
     }
     // turn off the LED
